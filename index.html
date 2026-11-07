@@ -6,7 +6,7 @@
 :root{--bg:#f6f1f4;--surface:#ffffff;--fg:#2c1424;--muted:#76606d;--line:#e3d5de;--accent:#5a1440;--accent2:#1f9e80;--display:'Gloock',Georgia,serif;--body:'Figtree',system-ui,sans-serif}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171016;--surface:#221822;--fg:#f1e7ee;--muted:#b19ca9;--line:#3a2a36;--accent:#e7a3c9;--accent2:#5fd3b5;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#171016;--surface:#221822;--fg:#f1e7ee;--muted:#b19ca9;--line:#3a2a36;--accent:#e7a3c9;--accent2:#5fd3b5;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.55 var(--body)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--fg);font:400 15px/1.55 var(--body)}
 .page{max-width:1280px;margin:0 auto;padding-block:28px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
 header h1{font:400 clamp(30px,4vw,44px)/1.05 var(--display);margin:0;text-wrap:balance}
 header p{margin:6px 0 0;color:var(--muted);max-width:70ch}
@@ -32,7 +32,7 @@ header p{margin:6px 0 0;color:var(--muted);max-width:70ch}
 .chrome i{width:10px;height:10px;border-radius:50%;background:var(--line)}
 .chrome .url{flex:1;min-width:0;margin-left:8px;background:var(--bg);border-radius:8px;padding:4px 12px;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stage{display:flex;justify-content:center;background:var(--bg)}
-iframe{display:block;border:0;width:100%;height:min(78vh,820px);background:#fff;transition:width .35s}
+iframe{display:block;border:0;width:100%;height:min(78vh,820px);height:min(78svh,820px);background:#fff;transition:width .35s}
 .stage.mobile iframe{width:min(390px,100%);border-inline:1px solid var(--line)}
 .hint{color:var(--muted);font-size:13px;margin:0}
 @media (max-width:760px){.tabs{grid-template-columns:1fr}}
@@ -48,7 +48,7 @@ iframe{display:block;border:0;width:100%;height:min(78vh,820px);background:#fff;
   <div class="tabs" role="tablist" aria-label="Propuestas">
     <button class="tab" role="tab" id="t-a" data-k="a" aria-selected="true"><span class="k">Opción A</span><b>Mariposa</b><span>Editorial claro, ciruela y menta del logo, letra manuscrita.</span><div class="sw"><i style="background:#f8f3f6"></i><i style="background:#5a1440"></i><i style="background:#21a887"></i><i style="background:#d3f1e8"></i></div></button>
     <button class="tab" role="tab" id="t-b" data-k="b" aria-selected="false"><span class="k">Opción B</span><b>Terraza de noche</b><span>Oscuro y cálido, inspirado en las luces de la terraza.</span><div class="sw"><i style="background:#110a12"></i><i style="background:#6d1a4b"></i><i style="background:#f4c46a"></i><i style="background:#64d6b8"></i></div></button>
-    <button class="tab" role="tab" id="t-c" data-k="c" aria-selected="false"><span class="k">Opción C</span><b>Pinceladas</b><span>Vibrante, con los colores de la pintura de la mariposa.</span><div class="sw"><i style="background:#e0236e"></i><i style="background:#2a46c4"></i><i style="background:#22c3a0"></i><i style="background:#f7c63e"></i></div></button>
+    <button class="tab" role="tab" id="t-c" data-k="c" aria-selected="false"><span class="k">Opción C</span><b>Pinceladas</b><span>Tonos pastel tomados de la pintura de la mariposa.</span><div class="sw"><i style="background:#f8c6d8"></i><i style="background:#c6d6fa"></i><i style="background:#bfeee0"></i><i style="background:#fde9b0"></i></div></button>
   </div>
 
   <div class="detail">

@@ -16,7 +16,9 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--night);color:var(--text);font:400 16.5px/1.65 var(--body);overflow-x:hidden}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--night);color:var(--text);font:400 16.5px/1.65 var(--body);-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--bulb);outline-offset:3px}
@@ -28,11 +30,11 @@ a{color:inherit}
 .wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 
 /* Guirnalda */
-.lights{position:fixed;left:0;right:0;top:0;height:46px;z-index:30;pointer-events:none}
+.lights{position:fixed;left:0;right:0;top:0;top:env(safe-area-inset-top,0px);height:46px;z-index:30;pointer-events:none}
 .lights svg{width:100%;height:100%;overflow:visible}
 .bulb{fill:#3a2a2a;transition:fill .35s}
 .bulb.on{fill:var(--bulb);filter:drop-shadow(0 0 6px var(--bulb)) drop-shadow(0 0 14px rgba(244,196,106,.6))}
-header.top{position:absolute;top:44px;left:0;right:0;z-index:5}
+header.top{position:absolute;top:calc(44px + env(safe-area-inset-top,0px));left:0;right:0;z-index:5}
 header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .word{font:italic 400 30px/1 var(--display);letter-spacing:.02em}
 .word span{color:var(--bulb)}
@@ -40,7 +42,7 @@ header.top .wrap{display:flex;justify-content:space-between;align-items:center;g
 .top nav a{text-decoration:none;opacity:.8}.top nav a:hover{opacity:1;color:var(--bulb)}
 
 /* Hero */
-.hero{position:relative;height:max(560px,92vh);overflow:hidden;display:flex;align-items:flex-end}
+.hero{position:relative;min-height:max(560px,92vh);min-height:max(560px,92svh);overflow:hidden;display:flex;align-items:flex-end;padding-top:calc(120px + env(safe-area-inset-top,0px))}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 30%;will-change:transform}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,10,18,.55) 0%,rgba(17,10,18,.1) 40%,rgba(17,10,18,.95) 100%)}
 .hero .wrap{position:relative;z-index:2;width:100%;padding-block:0 70px}
@@ -69,7 +71,7 @@ h2{font:400 clamp(36px,5vw,64px)/1 var(--display);margin:0;text-wrap:balance}
 h2 i{color:var(--bulb)}
 .stack-head p{max-width:34ch;color:var(--muted);margin:0}
 .stack{display:flex;flex-direction:column;gap:40px;padding-bottom:80px}
-.sc{position:sticky;top:calc(80px + var(--i)*22px);display:grid;grid-template-columns:1.1fr 1fr;min-height:min(460px,68vh);background:var(--night2);border:1px solid var(--line);border-radius:6px;overflow:hidden;transform-origin:50% 0;will-change:transform;box-shadow:0 -20px 40px -20px rgba(0,0,0,.8)}
+.sc{position:sticky;top:calc(80px + var(--i)*22px);display:grid;grid-template-columns:1.1fr 1fr;min-height:min(460px,68vh);min-height:min(460px,68svh);background:var(--night2);border:1px solid var(--line);border-radius:6px;overflow:hidden;transform-origin:50% 0;will-change:transform;box-shadow:0 -20px 40px -20px rgba(0,0,0,.8)}
 .sc img{width:100%;height:100%;object-fit:cover;min-height:260px}
 .sc .tx{padding:40px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
 .sc .k{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mint)}
@@ -81,6 +83,7 @@ h2 i{color:var(--bulb)}
 /* Horario */
 .hours{background:linear-gradient(180deg,var(--night),#1a0e17 50%,var(--night));padding-block:110px}
 .hours .wrap{display:grid;grid-template-columns:auto 1fr;gap:70px;align-items:center}
+.hours .wrap > *,.intro > *{min-width:0}
 .dial{width:min(340px,80vw);aspect-ratio:1}
 .dial text{font:500 11px var(--body);fill:var(--muted)}
 .status{display:inline-flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);padding:8px 14px;border-radius:999px;margin-bottom:18px}
@@ -110,9 +113,20 @@ footer p{margin:0;color:var(--muted);font-size:14px}
 }
 @media (max-width:860px){
   .top nav{display:none}
+  .hero .wrap{padding-block:0 48px}
+  h1{font-size:clamp(40px,12vw,60px)}
+  .kicker{font-size:11.5px;letter-spacing:.16em}
+  .figs b{font-size:30px}
+  .figs div{padding:16px 10px}
+  .sc{min-height:0}
+  .sc img{min-height:0;height:200px}
+  .sc h3{font-size:30px}
+  .hours{padding-block:72px}
+  .hours ul{grid-template-columns:1fr}
+  .hours h2{font-size:clamp(28px,8vw,40px)}
+  .sweets{padding-block:20px 72px}
   .intro{grid-template-columns:1fr;gap:40px;padding-block:70px}
-  .sc{grid-template-columns:1fr;top:calc(60px + var(--i)*14px)}
-  .sc img{max-height:220px}
+  .sc{grid-template-columns:1fr;top:calc(60px + env(safe-area-inset-top,0px) + var(--i)*14px)}
   .sc .tx{padding:24px}
   .hours .wrap{grid-template-columns:1fr;gap:40px;justify-items:center}
   .strip{grid-template-columns:1fr 1fr}
@@ -199,7 +213,7 @@ footer p{margin:0;color:var(--muted);font-size:14px}
   const svg = document.getElementById('lights'); const NS = 'http://www.w3.org/2000/svg';
   let bulbs = [];
   function drawLights(){
-    const w = innerWidth, n = Math.max(10, Math.round(w / 70)); svg.setAttribute('viewBox', `0 0 ${w} 46`); svg.innerHTML = '';
+    const w = document.documentElement.clientWidth, n = Math.max(10, Math.round(w / 70)); svg.setAttribute('viewBox', `0 0 ${w} 46`); svg.innerHTML = '';
     const sag = (x) => 6 + 18 * Math.sin(Math.PI * ((x % (w/2)) / (w/2)));
     let d = 'M0 6'; for (let x = 0; x <= w; x += 10) d += ` L${x} ${sag(x).toFixed(1)}`;
     const wire = document.createElementNS(NS, 'path'); wire.setAttribute('d', d); wire.setAttribute('fill', 'none'); wire.setAttribute('stroke', '#4a3a3a'); wire.setAttribute('stroke-width', '1.5'); svg.appendChild(wire);
@@ -208,7 +222,8 @@ footer p{margin:0;color:var(--muted);font-size:14px}
       const c = document.createElementNS(NS, 'line'); c.setAttribute('x1', x); c.setAttribute('x2', x); c.setAttribute('y1', y); c.setAttribute('y2', y + 5); c.setAttribute('stroke', '#4a3a3a'); svg.appendChild(c);
       const b = document.createElementNS(NS, 'ellipse'); b.setAttribute('cx', x); b.setAttribute('cy', y + 10); b.setAttribute('rx', 4.2); b.setAttribute('ry', 5.6); b.setAttribute('class', 'bulb'); svg.appendChild(b); bulbs.push(b); }
   }
-  drawLights(); addEventListener('resize', drawLights);
+  let lw = 0; const redraw = () => { if (innerWidth !== lw){ lw = innerWidth; drawLights(); } };
+  redraw(); addEventListener('resize', redraw);
 
   // Reloj 24 h
   const dial = document.getElementById('dial');
