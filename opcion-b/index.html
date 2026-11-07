@@ -142,6 +142,34 @@ h2{font-size:clamp(48px,6.6vw,86px);line-height:1}
 .sc h3{font-size:clamp(46px,5vw,68px);line-height:1}
 footer .big{font-size:clamp(46px,5.6vw,72px);line-height:1}
 @media (max-width:860px){h1{font-size:clamp(56px,16vw,82px)}h2,.hours h2{font-size:clamp(42px,12vw,58px)}.sc h3{font-size:44px}}
+
+/* Mariposas y menú flotante */
+.flock{position:fixed;inset:0;pointer-events:none;z-index:18;overflow:hidden}
+.flock svg{position:absolute;left:0;top:0;will-change:transform}
+.flock .wl,.flock .wr{transform-box:fill-box}
+.flock .wl{transform-origin:right center}.flock .wr{transform-origin:left center}
+.dock,.mname,.mtag{display:none}
+@media (max-width:700px){
+  .dock{display:flex;position:fixed;z-index:35;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);gap:2px;padding:6px;border-radius:22px;background:rgba(27,17,29,.82);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 12px 30px -10px rgba(0,0,0,.4),0 0 0 1px #33232f;transition:transform .35s,opacity .35s}
+  .dock.hide{transform:translate(-50%,140%);opacity:0}
+  .dock a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 11px;border-radius:16px;font-size:11.5px;font-weight:600;text-decoration:none;color:#efe6ea}
+  .dock svg{width:20px;height:20px;fill:none;stroke:#efe6ea;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .dock a.on{background:#33232f}
+  .dock .go{justify-content:center;background:#f4c46a;color:#110a12;padding-inline:16px;font-size:13px;margin-left:4px}
+  footer{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))!important}
+  .top .word{display:none}
+  .hero{padding-top:calc(70px + env(safe-area-inset-top,0px))}
+  .hero-in{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .mname{display:block;font:700 30vw/.82 var(--title);color:var(--bulb-soft);white-space:nowrap;letter-spacing:.01em;text-shadow:0 0 18px rgba(244,196,106,.55),0 0 46px rgba(244,196,106,.35)}
+  .mtag{display:block;font:600 12px var(--body);letter-spacing:.3em;text-transform:uppercase;color:var(--mint);margin:10px 0 18px}
+  .mtag::before,.mtag::after{content:"✦";color:var(--bulb);margin:0 10px;letter-spacing:0}
+  .kicker{order:5;margin-top:18px;font-size:11px;color:var(--muted)}
+  h1{font-size:clamp(36px,10.5vw,48px);margin:0 0 14px}
+  h1 .l{transform:none!important}
+  .hero p{margin:0 auto 22px;font-size:15.5px}
+  .row{flex-direction:column;width:100%;max-width:340px}
+  .row .btn{justify-content:center;padding:15px 20px;font-size:16px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -156,7 +184,9 @@ footer .big{font-size:clamp(46px,5.6vw,72px);line-height:1}
 
 <section class="hero">
   <img id="hero" src="img/terraza.jpg" alt="Terraza de Farfalla de noche, con luces colgantes">
-  <div class="wrap">
+  <div class="wrap hero-in">
+    <div class="mname" aria-hidden="true">Farfalla</div>
+    <div class="mtag">trattoria · caffè</div>
     <div class="kicker">Restaurante y cafetería · Aldama 7, Chignahuapan</div>
     <h1><span class="l" id="l1">Las noches del pueblo</span><span class="l" id="l2"><i>saben a Italia.</i></span></h1>
     <p>Pizza recién salida del horno, una copa en la terraza, en pleno centro del Pueblo Mágico. Abierto todos los días hasta las 23:00.</p>
@@ -176,10 +206,10 @@ footer .big{font-size:clamp(46px,5.6vw,72px);line-height:1}
 <section class="wrap" id="carta">
   <div class="stack-head"><h2>La carta, <i>plato a plato</i></h2><p>Las recomendaciones que más se repiten en las reseñas de quienes ya nos visitaron.</p></div>
   <div class="stack" id="stack">
-    <article class="sc" style="--i:0"><img src="img/pizza2.jpg" alt="Pizza al horno sobre tabla de madera"><div class="tx"><div><div class="k">Del horno</div><h3>Pizza Margherita y pepperoni</h3><p>Masa delgada, orilla dorada y los ingredientes de siempre. Para compartir al centro de la mesa.</p></div><div class="pair">Acompaña con: una copa de vino tinto</div></div><div class="shade"></div></article>
-    <article class="sc" style="--i:1"><img src="img/lasana.jpg" alt="Lasaña de la casa"><div class="tx"><div><div class="k">Pasta</div><h3>Lasaña de la casa</h3><p>Capas generosas de ragú, bechamel y queso gratinado, servida con salsa de tomate.</p></div><div class="pair">Acompaña con: ensalada de fresa y espinaca</div></div><div class="shade"></div></article>
-    <article class="sc" style="--i:2"><img src="img/ensalada.jpg" alt="Ensalada de espinaca, fresa y aguacate"><div class="tx"><div><div class="k">Fresco</div><h3>Ensalada de fresa</h3><p>Espinaca, fresa, aguacate y almendra fileteada.</p></div><div class="pair">Acompaña con: agua fresca de frutos rojos</div></div><div class="shade"></div></article>
-    <article class="sc" style="--i:3"><img src="img/cheesecake.jpg" alt="Cheesecake de frutos rojos"><div class="tx"><div><div class="k">Para cerrar</div><h3>Cheesecake y café</h3><p>El final que piden casi todas las mesas: cheesecake de frutos rojos con un espresso.</p></div><div class="pair">Acompaña con: capuchino de la casa</div></div><div class="shade"></div></article>
+    <article class="sc" style="--i:0"><img loading="lazy" decoding="async" src="img/pizza2.jpg" alt="Pizza al horno sobre tabla de madera"><div class="tx"><div><div class="k">Del horno</div><h3>Pizza Margherita y pepperoni</h3><p>Masa delgada, orilla dorada y los ingredientes de siempre. Para compartir al centro de la mesa.</p></div><div class="pair">Acompaña con: una copa de vino tinto</div></div><div class="shade"></div></article>
+    <article class="sc" style="--i:1"><img loading="lazy" decoding="async" src="img/lasana.jpg" alt="Lasaña de la casa"><div class="tx"><div><div class="k">Pasta</div><h3>Lasaña de la casa</h3><p>Capas generosas de ragú, bechamel y queso gratinado, servida con salsa de tomate.</p></div><div class="pair">Acompaña con: ensalada de fresa y espinaca</div></div><div class="shade"></div></article>
+    <article class="sc" style="--i:2"><img loading="lazy" decoding="async" src="img/ensalada.jpg" alt="Ensalada de espinaca, fresa y aguacate"><div class="tx"><div><div class="k">Fresco</div><h3>Ensalada de fresa</h3><p>Espinaca, fresa, aguacate y almendra fileteada.</p></div><div class="pair">Acompaña con: agua fresca de frutos rojos</div></div><div class="shade"></div></article>
+    <article class="sc" style="--i:3"><img loading="lazy" decoding="async" src="img/cheesecake.jpg" alt="Cheesecake de frutos rojos"><div class="tx"><div><div class="k">Para cerrar</div><h3>Cheesecake y café</h3><p>El final que piden casi todas las mesas: cheesecake de frutos rojos con un espresso.</p></div><div class="pair">Acompaña con: capuchino de la casa</div></div><div class="shade"></div></article>
   </div>
 </section>
 
@@ -204,10 +234,10 @@ footer .big{font-size:clamp(46px,5.6vw,72px);line-height:1}
 <section class="wrap sweets" id="dulce">
   <h2 class="rv">Y siempre, <i>algo dulce</i></h2>
   <div class="strip">
-    <figure class="rv"><img src="img/pay.jpg" alt="Pay de limón"><figcaption>Pay de limón</figcaption></figure>
-    <figure class="rv"><img src="img/churros.jpg" alt="Churros con cajeta"><figcaption>Churros</figcaption></figure>
-    <figure class="rv"><img src="img/frape.jpg" alt="Frappé de chocolate"><figcaption>Frappé</figcaption></figure>
-    <figure class="rv"><img src="img/panque.jpg" alt="Panqué con helado"><figcaption>Panqué con helado</figcaption></figure>
+    <figure class="rv"><img loading="lazy" decoding="async" src="img/pay.jpg" alt="Pay de limón"><figcaption>Pay de limón</figcaption></figure>
+    <figure class="rv"><img loading="lazy" decoding="async" src="img/churros.jpg" alt="Churros con cajeta"><figcaption>Churros</figcaption></figure>
+    <figure class="rv"><img loading="lazy" decoding="async" src="img/frape.jpg" alt="Frappé de chocolate"><figcaption>Frappé</figcaption></figure>
+    <figure class="rv"><img loading="lazy" decoding="async" src="img/panque.jpg" alt="Panqué con helado"><figcaption>Panqué con helado</figcaption></figure>
   </div>
 </section>
 
@@ -215,6 +245,14 @@ footer .big{font-size:clamp(46px,5.6vw,72px);line-height:1}
   <div class="big">Ven o llámanos,<br><span>sabes que quieres.</span></div>
   <p>Sabores Farfalla · Aldama 7, Centro, 73300 Chignahuapan, Pue.<br>@saboresfarfalla en Instagram y Twitter</p>
 </div></footer>
+
+<nav class="dock hide" aria-label="Secciones">
+  <a href="#carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18H6zM9 7h6M9 11h6M9 15h4"/></svg>Carta</a>
+  <a href="#horario"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Horario</a>
+  <a href="#dulce"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14h16l-2 6H6zM6 14c0-4 3-7 6-7s6 3 6 7M12 7V4"/></svg>Postres</a>
+  <a class="go" href="https://www.instagram.com/saboresfarfalla" target="_blank" rel="noopener">Reservar</a>
+</nav>
+<div class="flock" id="flock" aria-hidden="true"></div>
 
 <script>
 (() => {
@@ -270,6 +308,57 @@ footer .big{font-size:clamp(46px,5.6vw,72px);line-height:1}
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  // Mariposas que vuelan con el scroll
+  const flock = document.getElementById('flock');
+  const pal = [['#f4c46a','#c8853a'],['#f8deaa','#f4c46a'],['#64d6b8','#2b9378'],['#e7a3c9','#6d1a4b'],['#f4c46a','#6d1a4b']];
+  const N = innerWidth < 700 ? 5 : 7, flies = [];
+  for (let i = 0; i < N; i++){
+    const c = pal[i % pal.length], size = 20 + Math.random() * 18;
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); el.setAttribute('viewBox', '0 0 34 30'); el.setAttribute('width', size); el.setAttribute('height', size * .88);
+    el.innerHTML = `<g class="wl"><path d="M17 15C10 2 0 2 2 10c1 5 8 6 15 5z" fill="${c[0]}"/><path d="M17 16c-8 1-13 8-9 11 4 2 8-5 9-11z" fill="${c[1]}" opacity=".85"/></g><g class="wr"><path d="M17 15C24 2 34 2 32 10c-1 5-8 6-15 5z" fill="${c[0]}"/><path d="M17 16c8 1 13 8 9 11-4 2-8-5-9-11z" fill="${c[1]}" opacity=".85"/></g><rect x="16" y="9" width="2" height="14" rx="1" fill="#110a12"/>`;
+    el.style.filter = 'drop-shadow(0 0 6px rgba(244,196,106,.75))';
+    flock.appendChild(el);
+    flies.push({ el, wl: el.querySelector('.wl'), wr: el.querySelector('.wr'), x: .06 + .88 * (i / (N - 1 || 1)), y: Math.random(), sp: .25 + Math.random() * .45, amp: 18 + Math.random() * 40, ph: Math.random() * 6.28, k: .6 + Math.random() * .8, px: 0, py: 0 });
+  }
+  let tPrev = performance.now(), fyLast = scrollY, fvel = 0;
+  function flyFrame(t){
+    const dt = Math.min(50, t - tPrev) / 1000; tPrev = t;
+    const W = document.documentElement.clientWidth, H = innerHeight, y = scrollY;
+    fvel = fvel * .85 + Math.abs(y - fyLast) * .15; fyLast = y;
+    flies.forEach(f => {
+      f.ph += dt * (6 + fvel * .5) * f.k;
+      const span = H + 120, raw = f.y * span - y * f.sp - t * .012 * f.k;
+      const fy = ((raw % span) + span) % span - 60;
+      const fx = f.x * W + Math.sin(t / 1400 * f.k + f.ph * .05) * f.amp;
+      const dx = fx - f.px, dy = fy - f.py; f.px = fx; f.py = fy;
+      const ang = Math.abs(dy) > 200 ? 0 : Math.max(-35, Math.min(35, dx * 3));
+      f.el.style.transform = `translate(${fx.toFixed(1)}px,${fy.toFixed(1)}px) rotate(${ang.toFixed(1)}deg)`;
+      f.wl.style.transform = f.wr.style.transform = `scaleX(${(.4 + .6 * Math.abs(Math.cos(f.ph))).toFixed(3)})`;
+    });
+    requestAnimationFrame(flyFrame);
+  }
+  if (!reduce) requestAnimationFrame(flyFrame);
+  else flies.forEach(f => f.el.style.transform = `translate(${f.x * innerWidth}px,${f.y * innerHeight}px)`);
+
+  // Nombre a lo ancho de la pantalla en móvil
+  const giant = document.querySelector('.mname');
+  function fitGiant(){ if (!giant) return; giant.style.fontSize = ''; if (innerWidth > 700) return;
+    const box = giant.parentElement.clientWidth * .96, fs = parseFloat(getComputedStyle(giant).fontSize);
+    const range = document.createRange(); range.selectNodeContents(giant); const w = range.getBoundingClientRect().width;
+    if (w > 0) giant.style.fontSize = Math.min(fs * box / w, 260) + 'px'; }
+  let gw = 0; const refit = () => { if (innerWidth !== gw){ gw = innerWidth; fitGiant(); } };
+  refit(); addEventListener('resize', refit); document.fonts && document.fonts.ready.then(fitGiant);
+
+  // Menú flotante en móvil
+  const dock = document.querySelector('.dock'), dl = [...dock.querySelectorAll('a[href^="#"]')];
+  const secs = dl.map(a => document.querySelector(a.getAttribute('href')));
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    const yy = scrollY; if (yy < innerHeight * .6) dock.classList.add('hide'); else if (yy > lastY + 4) dock.classList.add('hide'); else if (yy < lastY - 4) dock.classList.remove('hide'); lastY = yy;
+    let cur = -1; secs.forEach((sec, i) => { if (sec && sec.getBoundingClientRect().top < innerHeight * .5) cur = i; });
+    dl.forEach((a, i) => a.classList.toggle('on', i === cur));
+  }, { passive: true });
 })();
 </script>
 </body>
