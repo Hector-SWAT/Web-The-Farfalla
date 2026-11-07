@@ -130,6 +130,66 @@ h2{font-size:clamp(50px,8vw,104px);line-height:.95}
 .marq .row{font-size:clamp(56px,8vw,110px)}
 .marq .o{color:#8a7fb0;-webkit-text-fill-color:#8a7fb0;-webkit-text-stroke:0}
 @media (max-width:860px){.logo{font-size:28px}}
+
+/* Hero centrado */
+.hero-in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.medal{position:relative;width:clamp(150px,16vw,200px);aspect-ratio:1;display:grid;place-items:center;margin-bottom:6px}
+.medal img{width:66%;aspect-ratio:1;object-fit:cover;border-radius:50%;box-shadow:0 0 0 6px #fff,0 18px 40px -16px rgba(59,51,80,.45)}
+.medal .ring{position:absolute;inset:0;width:100%;height:100%;animation:spin 26s linear infinite}
+.medal text{font:600 11.5px var(--display);letter-spacing:.24em;text-transform:uppercase;fill:var(--rose-ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.kick{font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--sky-ink);margin-top:6px}
+.giant{text-align:center;margin-top:4px}
+.note{margin:0 auto;transform:rotate(-4deg)}
+.note::before{display:none}
+.lede{max-width:40ch;margin:22px auto 26px;font-size:19px}
+.lede b{background:linear-gradient(transparent 58%,var(--sun) 58%)}
+.hint{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:28px;text-decoration:none;font:700 22px var(--hand);color:var(--muted)}
+.hint i{width:22px;height:34px;border:2px solid var(--muted);border-radius:12px;position:relative}
+.hint i::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--rose-ink);animation:wheel 1.6s ease-in-out infinite}
+@keyframes wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(12px);opacity:0}100%{opacity:0}}
+.swipe{display:none}
+
+/* Mariposas */
+.flock{position:fixed;inset:0;pointer-events:none;z-index:25;overflow:hidden}
+.flock svg{position:absolute;left:0;top:0;will-change:transform}
+.flock .wl,.flock .wr{transform-box:fill-box}
+.flock .wl{transform-origin:right center}.flock .wr{transform-origin:left center}
+
+/* Dock móvil */
+.dock{display:none}
+
+@media (max-width:700px){
+  .bar .wrap{justify-content:center;padding-block:14px 10px}
+  .hero{min-height:calc(100vh - 56px);min-height:calc(100svh - 56px);display:flex;align-items:center;padding-block:20px calc(96px + env(safe-area-inset-bottom,0px))}
+  .hero-in{width:100%}
+  .medal{width:40vw;max-width:170px}
+  .giant{font-size:34vw;line-height:.8;margin-top:8px;align-self:stretch;white-space:nowrap}
+  .note{font-size:28px}
+  .lede{font-size:17px;margin:18px auto 22px}
+  .btn{width:100%;max-width:340px;justify-content:center;padding:16px 22px;font-size:17px;border-radius:18px 6px 18px 6px}
+  .hint{margin-top:22px}
+  .marq .row{font-size:15vw}
+  .reveal .say{font-size:14vw}
+  .wall h2{text-align:center}
+  .swipe{display:block;text-align:center;margin:-34px 0 6px;font:700 22px var(--hand);color:var(--muted)}
+  .pols{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;gap:18px;margin-inline:calc(-1 * max(20px,env(safe-area-inset-left,0px)));padding:26px 14vw 30px;scrollbar-width:none}
+  .pols::-webkit-scrollbar{display:none}
+  .pol{flex:0 0 72vw;scroll-snap-align:center;padding:10px 10px 8px}
+  .pol p{font-size:24px}
+  .info{grid-template-columns:1fr 1fr}
+  .bl,.co{grid-column:1 / -1}
+  .y,.ma{padding:20px}
+  .y .v,.ma .v{font-size:40px}
+  .y p,.ma p{font-size:14px}
+  footer .wrap{flex-direction:column;align-items:center;text-align:center;padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
+  .dock{display:flex;position:fixed;z-index:35;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);gap:2px;padding:6px;border-radius:22px;background:rgba(255,252,253,.86);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 12px 30px -10px rgba(59,51,80,.35),0 0 0 1px var(--lilac);transition:transform .35s,opacity .35s}
+  .dock.hide{transform:translate(-50%,140%);opacity:0}
+  .dock a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 11px;border-radius:16px;font-size:11.5px;font-weight:600;text-decoration:none;color:var(--ink)}
+  .dock svg{width:20px;height:20px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .dock a.on{background:var(--lilac)}
+  .dock .go{justify-content:center;background:var(--ink);color:#fff;padding-inline:16px;font-size:13px;margin-left:4px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -147,21 +207,25 @@ h2{font-size:clamp(50px,8vw,104px);line-height:.95}
   <nav><a href="#platos">Platos</a><a href="#lugar">El lugar</a><a href="#visita">Visítanos</a></nav>
 </div></div>
 
-<header class="hero">
+<header class="hero" id="inicio">
   <div class="blob b1" data-s=".35"></div><div class="blob b2" data-s="-.2"></div><div class="blob b3" data-s=".5"></div>
-  <div class="wrap" style="position:relative">
+  <div class="wrap hero-in">
+    <div class="medal">
+      <svg class="ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="rc" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs><text><textPath href="#rc">sabores farfalla · chignahuapan · pueblo mágico ·</textPath></text></svg>
+      <img src="img/mariposa.jpg" alt="Pintura de la mariposa que cuelga en el restaurante" fetchpriority="high">
+    </div>
+    <div class="kick">Cocina italiana y cafetería</div>
     <h1 class="giant">Farfalla</h1>
     <div class="note">= mariposa, en italiano</div>
-    <div class="hero-foot">
-      <p>Pizza, pasta, café y postres en el centro de Chignahuapan. <b>Sabores Farfalla es un lugar para ti.</b></p>
-      <a class="btn" href="https://www.instagram.com/saboresfarfalla" target="_blank" rel="noopener">Reserva por Instagram</a>
-    </div>
+    <p class="lede">Pizza, pasta, café y postres en el centro de Chignahuapan. <b>Sabores Farfalla es un lugar para ti.</b></p>
+    <a class="btn" href="https://www.instagram.com/saboresfarfalla" target="_blank" rel="noopener">Reserva por Instagram</a>
+    <a class="hint" href="#platos" aria-label="Bajar a los platillos"><span>desliza</span><i></i></a>
   </div>
 </header>
 
 <section class="marq" id="platos" aria-label="Platillos destacados">
-  <div class="row" data-dir="-1"><span>Margherita</span><img src="img/pizza3.jpg" alt=""><span class="o">Pepperoni</span><img src="img/pizza-corazon.jpg" alt=""><span class="m">Lasaña</span><img src="img/lasana.jpg" alt=""><span>Pescado monje</span><img src="img/pizza2.jpg" alt=""><span class="o">Margherita</span><img src="img/pizza3.jpg" alt=""><span class="c">Pepperoni</span><img src="img/pizza-corazon.jpg" alt=""><span>Lasaña</span></div>
-  <div class="row" data-dir="1"><span class="t">Cheesecake</span><img src="img/cheesecake.jpg" alt=""><span class="o">Capuchino</span><img src="img/capuchino.jpg" alt=""><span>Pay de limón</span><img src="img/pay.jpg" alt=""><span class="m">Frappé</span><img src="img/frape.jpg" alt=""><span class="o">Churros</span><img src="img/churros.jpg" alt=""><span class="c">Cheesecake</span><img src="img/cheesecake.jpg" alt=""><span>Capuchino</span></div>
+  <div class="row" data-dir="-1"><span>Margherita</span><img loading="lazy" decoding="async" src="img/pizza3.jpg" alt=""><span class="o">Pepperoni</span><img loading="lazy" decoding="async" src="img/pizza-corazon.jpg" alt=""><span class="m">Lasaña</span><img loading="lazy" decoding="async" src="img/lasana.jpg" alt=""><span>Pescado monje</span><img loading="lazy" decoding="async" src="img/pizza2.jpg" alt=""><span class="o">Margherita</span><img loading="lazy" decoding="async" src="img/pizza3.jpg" alt=""><span class="c">Pepperoni</span><img loading="lazy" decoding="async" src="img/pizza-corazon.jpg" alt=""><span>Lasaña</span></div>
+  <div class="row" data-dir="1"><span class="t">Cheesecake</span><img loading="lazy" decoding="async" src="img/cheesecake.jpg" alt=""><span class="o">Capuchino</span><img loading="lazy" decoding="async" src="img/capuchino.jpg" alt=""><span>Pay de limón</span><img loading="lazy" decoding="async" src="img/pay.jpg" alt=""><span class="m">Frappé</span><img loading="lazy" decoding="async" src="img/frape.jpg" alt=""><span class="o">Churros</span><img loading="lazy" decoding="async" src="img/churros.jpg" alt=""><span class="c">Cheesecake</span><img loading="lazy" decoding="async" src="img/cheesecake.jpg" alt=""><span>Capuchino</span></div>
 </section>
 
 <section class="reveal" id="lugar">
@@ -173,20 +237,21 @@ h2{font-size:clamp(50px,8vw,104px);line-height:.95}
 
 <section class="wrap wall">
   <h2>Lo que la gente <em>fotografía</em> antes de comer</h2>
+  <p class="swipe">desliza las fotos →</p>
   <div class="pols" id="pols">
-    <figure class="pol" style="--r:-4;--tape:#fde9b0"><img src="img/pizza2.jpg" alt="Pizza al horno"><p>la pizza al centro</p></figure>
-    <figure class="pol" style="--r:3;--tape:#bfeee0"><img src="img/pay.jpg" alt="Pay de limón"><p>pay de limón</p></figure>
-    <figure class="pol" style="--r:-2;--tape:#f8c6d8"><img src="img/capuchino.jpg" alt="Capuchino"><p>capuchino en copa</p></figure>
-    <figure class="pol" style="--r:5;--tape:#c6d6fa"><img src="img/churros.jpg" alt="Churros"><p>churros ✶</p></figure>
-    <figure class="pol" style="--r:2;--tape:#bfeee0"><img src="img/terraza.jpg" alt="Terraza de noche"><p>la terraza de noche</p></figure>
-    <figure class="pol" style="--r:-5;--tape:#fde9b0"><img src="img/cheesecake.jpg" alt="Cheesecake"><p>cheesecake</p></figure>
-    <figure class="pol" style="--r:4;--tape:#f8c6d8"><img src="img/frape.jpg" alt="Frappé"><p>frappé</p></figure>
-    <figure class="pol" style="--r:-3;--tape:#c6d6fa"><img src="img/lasana.jpg" alt="Lasaña"><p>la lasaña</p></figure>
+    <figure class="pol" style="--r:-4;--tape:#fde9b0"><img loading="lazy" decoding="async" src="img/pizza2.jpg" alt="Pizza al horno"><p>la pizza al centro</p></figure>
+    <figure class="pol" style="--r:3;--tape:#bfeee0"><img loading="lazy" decoding="async" src="img/pay.jpg" alt="Pay de limón"><p>pay de limón</p></figure>
+    <figure class="pol" style="--r:-2;--tape:#f8c6d8"><img loading="lazy" decoding="async" src="img/capuchino.jpg" alt="Capuchino"><p>capuchino en copa</p></figure>
+    <figure class="pol" style="--r:5;--tape:#c6d6fa"><img loading="lazy" decoding="async" src="img/churros.jpg" alt="Churros"><p>churros ✶</p></figure>
+    <figure class="pol" style="--r:2;--tape:#bfeee0"><img loading="lazy" decoding="async" src="img/terraza.jpg" alt="Terraza de noche"><p>la terraza de noche</p></figure>
+    <figure class="pol" style="--r:-5;--tape:#fde9b0"><img loading="lazy" decoding="async" src="img/cheesecake.jpg" alt="Cheesecake"><p>cheesecake</p></figure>
+    <figure class="pol" style="--r:4;--tape:#f8c6d8"><img loading="lazy" decoding="async" src="img/frape.jpg" alt="Frappé"><p>frappé</p></figure>
+    <figure class="pol" style="--r:-3;--tape:#c6d6fa"><img loading="lazy" decoding="async" src="img/lasana.jpg" alt="Lasaña"><p>la lasaña</p></figure>
   </div>
 </section>
 
 <section class="wrap info" id="visita">
-  <div class="blk bl"><h3>¿dónde?</h3><div class="v">Aldama 7, Centro</div><p>73300 Chignahuapan, Puebla. En el corazón del Pueblo Mágico.</p><img src="img/salon.jpg" alt="Salón principal"></div>
+  <div class="blk bl"><h3>¿dónde?</h3><div class="v">Aldama 7, Centro</div><p>73300 Chignahuapan, Puebla. En el corazón del Pueblo Mágico.</p><img loading="lazy" decoding="async" src="img/salon.jpg" alt="Salón principal"></div>
   <div class="blk y"><h3>¿cuándo?</h3><div class="v">09–23 h</div><p>Todos los días.</p></div>
   <div class="blk ma"><h3>¿qué tal?</h3><div class="v">4.9 ★</div><p>Facebook · 4.5 en Google</p></div>
   <div class="blk co"><h3>y además</h3><ul><li>Terraza al aire libre</li><li>Wi‑Fi</li><li>Entregas a domicilio</li><li>Reservas</li></ul></div>
@@ -196,6 +261,14 @@ h2{font-size:clamp(50px,8vw,104px);line-height:.95}
   <div class="big">Ven o llámanos,<br>sabes que quieres.</div>
   <p>@saboresfarfalla · Instagram y Twitter<br>2,9 mil personas ya nos siguen</p>
 </div></footer>
+
+<nav class="dock hide" aria-label="Secciones">
+  <a href="#platos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 4v5l3 2"/></svg>Platos</a>
+  <a href="#lugar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9l8-5 8 5v11h-5v-6H9v6z"/></svg>Lugar</a>
+  <a href="#visita"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>Visítanos</a>
+  <a class="go" href="https://www.instagram.com/saboresfarfalla" target="_blank" rel="noopener">Reservar</a>
+</nav>
+<div class="flock" id="flock" aria-hidden="true"></div>
 
 <script>
 (() => {
@@ -222,6 +295,56 @@ h2{font-size:clamp(50px,8vw,104px);line-height:.95}
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  // Mariposas que vuelan con el scroll
+  const flock = document.getElementById('flock');
+  const pal = [['#f4a9c6','#c74f82'],['#a9c0f4','#4b67c2'],['#9fe0cc','#2b9378'],['#fbd98a','#c98a2a'],['#d6c3f3','#7a5cc0']];
+  const N = innerWidth < 700 ? 5 : 7, flies = [];
+  for (let i = 0; i < N; i++){
+    const c = pal[i % pal.length], size = (innerWidth < 700 ? 26 : 24) + Math.random() * 20;
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); el.setAttribute('viewBox', '0 0 34 30'); el.setAttribute('width', size); el.setAttribute('height', size * .88);
+    el.innerHTML = `<g class="wl"><path d="M17 15C10 2 0 2 2 10c1 5 8 6 15 5z" fill="${c[0]}"/><path d="M17 16c-8 1-13 8-9 11 4 2 8-5 9-11z" fill="${c[1]}" opacity=".8"/></g><g class="wr"><path d="M17 15C24 2 34 2 32 10c-1 5-8 6-15 5z" fill="${c[0]}"/><path d="M17 16c8 1 13 8 9 11-4 2-8-5-9-11z" fill="${c[1]}" opacity=".8"/></g><rect x="16" y="9" width="2" height="14" rx="1" fill="#3b3350"/>`;
+    flock.appendChild(el);
+    flies.push({ el, wl: el.querySelector('.wl'), wr: el.querySelector('.wr'), x: .06 + .88 * (i / (N - 1 || 1)), y: Math.random(), sp: .25 + Math.random() * .45, amp: 18 + Math.random() * 40, ph: Math.random() * 6.28, k: .6 + Math.random() * .8, px: 0, py: 0 });
+  }
+  let tPrev = performance.now();
+  function flyFrame(t){
+    const dt = Math.min(50, t - tPrev) / 1000; tPrev = t;
+    const W = document.documentElement.clientWidth, H = innerHeight, y = scrollY, spd = Math.abs(vel);
+    flies.forEach(f => {
+      f.ph += dt * (6 + spd * .5) * f.k;
+      const span = H + 120, raw = f.y * span - y * f.sp - t * .012 * f.k;
+      const fy = ((raw % span) + span) % span - 60;
+      const fx = f.x * W + Math.sin(t / 1400 * f.k + f.ph * .05) * f.amp;
+      const dx = fx - f.px, dy = fy - f.py; f.px = fx; f.py = fy;
+      const ang = Math.abs(dy) > 200 ? 0 : Math.max(-35, Math.min(35, dx * 3));
+      f.el.style.transform = `translate(${fx.toFixed(1)}px,${fy.toFixed(1)}px) rotate(${ang.toFixed(1)}deg)`;
+      const sx = (.4 + .6 * Math.abs(Math.cos(f.ph))).toFixed(3);
+      f.wl.style.transform = f.wr.style.transform = `scaleX(${sx})`;
+    });
+    requestAnimationFrame(flyFrame);
+  }
+  if (!reduce) requestAnimationFrame(flyFrame);
+  else flies.forEach(f => f.el.style.transform = `translate(${f.x * innerWidth}px,${f.y * innerHeight}px)`);
+
+  // Nombre a lo ancho de la pantalla en móvil
+  const giant = document.querySelector('.giant');
+  function fitGiant(){ giant.style.fontSize = ''; if (innerWidth > 700) return;
+    const box = giant.parentElement.clientWidth * .96; let fs = parseFloat(getComputedStyle(giant).fontSize);
+    const range = document.createRange(); range.selectNodeContents(giant); const w = range.getBoundingClientRect().width;
+    if (w > 0) giant.style.fontSize = Math.min(fs * box / w, 260) + 'px'; }
+  let gw = 0; const refit = () => { if (innerWidth !== gw){ gw = innerWidth; fitGiant(); } };
+  refit(); addEventListener('resize', refit); document.fonts && document.fonts.ready.then(fitGiant);
+
+  // Dock: se esconde al bajar rápido, marca la sección visible
+  const dock = document.querySelector('.dock'), dl = [...dock.querySelectorAll('a[href^="#"]')];
+  const secs = dl.map(a => document.querySelector(a.getAttribute('href')));
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    const yy = scrollY; if (yy < innerHeight * .6) dock.classList.add('hide'); else if (yy > lastY + 4) dock.classList.add('hide'); else if (yy < lastY - 4) dock.classList.remove('hide'); lastY = yy;
+    let cur = -1; secs.forEach((sec, i) => { if (sec && sec.getBoundingClientRect().top < innerHeight * .5) cur = i; });
+    dl.forEach((a, i) => a.classList.toggle('on', i === cur));
+  }, { passive: true });
 })();
 </script>
 </body>
