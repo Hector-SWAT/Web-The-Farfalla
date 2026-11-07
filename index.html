@@ -1,0 +1,92 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Propuestas Farfalla</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: sala de revisión; selector de propuesta arriba, marco de navegador con la vista previa en vivo */
+:root{--bg:#f6f1f4;--surface:#ffffff;--fg:#2c1424;--muted:#76606d;--line:#e3d5de;--accent:#5a1440;--accent2:#1f9e80;--display:'Gloock',Georgia,serif;--body:'Figtree',system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171016;--surface:#221822;--fg:#f1e7ee;--muted:#b19ca9;--line:#3a2a36;--accent:#e7a3c9;--accent2:#5fd3b5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171016;--surface:#221822;--fg:#f1e7ee;--muted:#b19ca9;--line:#3a2a36;--accent:#e7a3c9;--accent2:#5fd3b5;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.55 var(--body)}
+.page{max-width:1280px;margin:0 auto;padding-block:28px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+header h1{font:400 clamp(30px,4vw,44px)/1.05 var(--display);margin:0;text-wrap:balance}
+header p{margin:6px 0 0;color:var(--muted);max-width:70ch}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tab{all:unset;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0;transition:border-color .2s,transform .2s}
+.tab:hover{transform:translateY(-2px)}
+.tab:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+.tab[aria-selected="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.tab .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);font-weight:600}
+.tab b{font:400 22px/1.1 var(--display)}
+.tab span{color:var(--muted);font-size:13.5px}
+.sw{display:flex;gap:6px;margin-top:6px}
+.sw i{width:16px;height:16px;border-radius:50%;box-shadow:0 0 0 1px var(--line)}
+.detail{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:13px;background:var(--surface)}
+.ctrl{display:flex;gap:6px;align-items:center}
+.ctrl button,.ctrl a{all:unset;cursor:pointer;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.ctrl button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.ctrl :focus-visible{outline:2px solid var(--accent2)}
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(44,20,36,.5)}
+.chrome{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.chrome i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.chrome .url{flex:1;min-width:0;margin-left:8px;background:var(--bg);border-radius:8px;padding:4px 12px;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stage{display:flex;justify-content:center;background:var(--bg)}
+iframe{display:block;border:0;width:100%;height:min(78vh,820px);background:#fff;transition:width .35s}
+.stage.mobile iframe{width:min(390px,100%);border-inline:1px solid var(--line)}
+.hint{color:var(--muted);font-size:13px;margin:0}
+@media (max-width:760px){.tabs{grid-template-columns:1fr}}
+</style>
+</head><body>
+
+<div class="page">
+  <header>
+    <h1>Sabores Farfalla: tres direcciones para la landing</h1>
+    <p>Cada vista previa es navegable. Haz scroll dentro del marco para ver la barra de desplazamiento personalizada y los efectos de cada propuesta.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Propuestas">
+    <button class="tab" role="tab" id="t-a" data-k="a" aria-selected="true"><span class="k">Opción A</span><b>Mariposa</b><span>Editorial claro, ciruela y menta del logo, letra manuscrita.</span><div class="sw"><i style="background:#f8f3f6"></i><i style="background:#5a1440"></i><i style="background:#21a887"></i><i style="background:#d3f1e8"></i></div></button>
+    <button class="tab" role="tab" id="t-b" data-k="b" aria-selected="false"><span class="k">Opción B</span><b>Terraza de noche</b><span>Oscuro y cálido, inspirado en las luces de la terraza.</span><div class="sw"><i style="background:#110a12"></i><i style="background:#6d1a4b"></i><i style="background:#f4c46a"></i><i style="background:#64d6b8"></i></div></button>
+    <button class="tab" role="tab" id="t-c" data-k="c" aria-selected="false"><span class="k">Opción C</span><b>Pinceladas</b><span>Vibrante, con los colores de la pintura de la mariposa.</span><div class="sw"><i style="background:#e0236e"></i><i style="background:#2a46c4"></i><i style="background:#22c3a0"></i><i style="background:#f7c63e"></i></div></button>
+  </div>
+
+  <div class="detail">
+    <div class="chips" id="chips"></div>
+    <div class="ctrl">
+      <button id="desk" aria-pressed="true">Escritorio</button>
+      <button id="mob" aria-pressed="false">Móvil</button>
+      <a id="open" href="opcion-a/" target="_blank" rel="noopener">Abrir completa ↗</a>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="chrome"><i></i><i></i><i></i><div class="url" id="url">saboresfarfalla.mx · Opción A, Mariposa</div></div>
+    <div class="stage" id="stage"><iframe id="view" src="opcion-a/" title="Vista previa de la propuesta"></iframe></div>
+  </div>
+  <p class="hint">Los textos son un borrador hecho con los datos de DatosRestaurante.txt; las fotos son las de la carpeta imgRest.</p>
+</div>
+
+<script>
+const info = {
+  a: { name: 'Mariposa', fx: ['Mariposa que vuela por la barra lateral según el scroll', 'Carta en riel horizontal anclado', 'Parallax en el arco del hero y en los granos de café', 'Scrollbar menta a ciruela', 'Sello giratorio y entrada de bloques al hacer scroll'] },
+  b: { name: 'Terraza de noche', fx: ['Guirnalda de focos que se encienden con el progreso', 'Carta en tarjetas apiladas', 'Hero con zoom de salida y titular que se abre', 'Reloj de 24 h con estado abierto o cerrado en vivo', 'Scrollbar dorada'] },
+  c: { name: 'Pinceladas', fx: ['Pincelada que se pinta arriba con el progreso', 'Marquesinas de platillos en sentidos opuestos', 'Revelado circular del interior', 'Polaroids que se mecen con la velocidad', 'Scrollbar en degradado de la pintura'] }
+};
+const view = document.getElementById('view'), chips = document.getElementById('chips'), url = document.getElementById('url'), open = document.getElementById('open');
+function show(k){
+  if (!info[k]) k = 'a';
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.k === k));
+  if (!view.src.includes("opcion-" + k)) view.src = "opcion-" + k + "/";
+  open.href = "opcion-" + k + "/";
+  url.textContent = 'saboresfarfalla.mx · Opción ' + k.toUpperCase() + ', ' + info[k].name;
+  chips.innerHTML = info[k].fx.map(f => '<span>' + f + '</span>').join('');
+}
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => { location.hash = 'opcion-' + t.dataset.k; show(t.dataset.k); }));
+addEventListener('hashchange', () => show(location.hash.replace('#opcion-', '')));
+show(location.hash.replace('#opcion-', '') || 'a');
+const stage = document.getElementById('stage'), desk = document.getElementById('desk'), mob = document.getElementById('mob');
+desk.onclick = () => { stage.classList.remove('mobile'); desk.setAttribute('aria-pressed', 'true'); mob.setAttribute('aria-pressed', 'false'); };
+mob.onclick = () => { stage.classList.add('mobile'); mob.setAttribute('aria-pressed', 'true'); desk.setAttribute('aria-pressed', 'false'); };
+</script>
+</body></html>

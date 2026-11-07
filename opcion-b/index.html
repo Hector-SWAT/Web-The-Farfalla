@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Farfalla · Terraza de noche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Manrope:wght@400;500;600&display=swap">
+<style>
+/* Layout: noche en la terraza; guirnalda de focos que se enciende con el scroll, carta en tarjetas apiladas, reloj de 24 h */
+:root{
+  --night:#110a12; --night2:#1b111d; --wine:#6d1a4b; --bulb:#f4c46a; --bulb-soft:#f8deaa; --mint:#64d6b8; --text:#efe6ea; --muted:#a8949f; --line:#33232f;
+  --display:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif; --body:'Manrope',system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--text);font:400 16.5px/1.65 var(--body);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--bulb);outline-offset:3px}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--night)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--bulb-soft),var(--bulb) 40%,#c8853a);border-radius:10px;border:2px solid var(--night)}
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--bulb) var(--night);scrollbar-width:thin}}
+::selection{background:var(--bulb);color:var(--night)}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* Guirnalda */
+.lights{position:fixed;left:0;right:0;top:0;height:46px;z-index:30;pointer-events:none}
+.lights svg{width:100%;height:100%;overflow:visible}
+.bulb{fill:#3a2a2a;transition:fill .35s}
+.bulb.on{fill:var(--bulb);filter:drop-shadow(0 0 6px var(--bulb)) drop-shadow(0 0 14px rgba(244,196,106,.6))}
+header.top{position:absolute;top:44px;left:0;right:0;z-index:5}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.word{font:italic 400 30px/1 var(--display);letter-spacing:.02em}
+.word span{color:var(--bulb)}
+.top nav{display:flex;gap:26px;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.top nav a{text-decoration:none;opacity:.8}.top nav a:hover{opacity:1;color:var(--bulb)}
+
+/* Hero */
+.hero{position:relative;height:max(560px,92vh);overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 30%;will-change:transform}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,10,18,.55) 0%,rgba(17,10,18,.1) 40%,rgba(17,10,18,.95) 100%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-block:0 70px}
+.kicker{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--bulb)}
+h1{font:400 clamp(46px,8.4vw,120px)/.95 var(--display);margin:16px 0 22px;letter-spacing:-.02em}
+h1 .l{display:block;will-change:transform}
+h1 i{color:var(--bulb-soft)}
+.hero p{max-width:46ch;color:#d9cbd2;margin:0 0 26px}
+.btn{display:inline-flex;gap:10px;align-items:center;background:var(--bulb);color:var(--night);font-weight:600;text-decoration:none;padding:13px 24px;border-radius:2px;letter-spacing:.04em;transition:box-shadow .3s,transform .3s}
+.btn:hover{box-shadow:0 0 30px rgba(244,196,106,.55);transform:translateY(-2px)}
+.btn.line{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1px var(--muted)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Intro */
+.intro{padding-block:110px 90px;display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:end}
+.intro blockquote{margin:0;font:italic 400 clamp(28px,3.4vw,44px)/1.2 var(--display);text-wrap:balance}
+.intro blockquote b{font-style:normal;color:var(--bulb);font-weight:400}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.figs div{background:var(--night);padding:20px 16px}
+.figs b{display:block;font:400 40px/1 var(--display);color:var(--bulb-soft);font-variant-numeric:tabular-nums}
+.figs span{font-size:12.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+/* Tarjetas apiladas */
+.stack-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:34px}
+h2{font:400 clamp(36px,5vw,64px)/1 var(--display);margin:0;text-wrap:balance}
+h2 i{color:var(--bulb)}
+.stack-head p{max-width:34ch;color:var(--muted);margin:0}
+.stack{display:flex;flex-direction:column;gap:40px;padding-bottom:80px}
+.sc{position:sticky;top:calc(80px + var(--i)*22px);display:grid;grid-template-columns:1.1fr 1fr;min-height:min(460px,68vh);background:var(--night2);border:1px solid var(--line);border-radius:6px;overflow:hidden;transform-origin:50% 0;will-change:transform;box-shadow:0 -20px 40px -20px rgba(0,0,0,.8)}
+.sc img{width:100%;height:100%;object-fit:cover;min-height:260px}
+.sc .tx{padding:40px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.sc .k{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mint)}
+.sc h3{font:400 clamp(32px,3.6vw,50px)/1.02 var(--display);margin:10px 0 12px}
+.sc p{margin:0;color:var(--muted);max-width:38ch}
+.sc .pair{font-size:14px;border-top:1px solid var(--line);padding-top:16px;color:var(--bulb-soft)}
+.sc .shade{position:absolute;inset:0;background:#000;opacity:var(--dim,0);pointer-events:none}
+
+/* Horario */
+.hours{background:linear-gradient(180deg,var(--night),#1a0e17 50%,var(--night));padding-block:110px}
+.hours .wrap{display:grid;grid-template-columns:auto 1fr;gap:70px;align-items:center}
+.dial{width:min(340px,80vw);aspect-ratio:1}
+.dial text{font:500 11px var(--body);fill:var(--muted)}
+.status{display:inline-flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);padding:8px 14px;border-radius:999px;margin-bottom:18px}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+.status.closed i{background:#e0607e;box-shadow:0 0 10px #e0607e}
+.hours ul{list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px 30px}
+.hours li{border-bottom:1px solid var(--line);padding-bottom:10px;display:flex;justify-content:space-between;gap:10px;font-size:15px}
+.hours li span{color:var(--muted)}
+
+/* Postres: tira con zoom */
+.sweets{padding-block:40px 110px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+.strip figure{margin:0;position:relative;overflow:hidden;border-radius:4px;aspect-ratio:3/4}
+.strip img{width:100%;height:100%;object-fit:cover;transition:transform 1s,filter .6s;filter:saturate(.85) brightness(.85)}
+.strip figure:hover img{transform:scale(1.08);filter:none}
+.strip figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(17,10,18,.9));font:italic 400 22px var(--display)}
+
+footer{border-top:1px solid var(--line);padding-block:50px}
+footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:end}
+footer .big{font:italic 400 clamp(32px,4vw,52px)/1.05 var(--display)}
+footer .big span{color:var(--bulb)}
+footer p{margin:0;color:var(--muted);font-size:14px}
+
+@supports (animation-timeline: view()){
+  .rv{animation:up linear both;animation-timeline:view();animation-range:entry 0% entry 65%}
+  @keyframes up{from{transform:translateY(50px);filter:blur(2px)}to{transform:none;filter:none}}
+}
+@media (max-width:860px){
+  .top nav{display:none}
+  .intro{grid-template-columns:1fr;gap:40px;padding-block:70px}
+  .sc{grid-template-columns:1fr;top:calc(60px + var(--i)*14px)}
+  .sc img{max-height:220px}
+  .sc .tx{padding:24px}
+  .hours .wrap{grid-template-columns:1fr;gap:40px;justify-items:center}
+  .strip{grid-template-columns:1fr 1fr}
+  .stack-head{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="lights" aria-hidden="true"><svg id="lights" preserveAspectRatio="none"></svg></div>
+
+<header class="top"><div class="wrap">
+  <div class="word">Farfalla<span>.</span></div>
+  <nav><a href="#carta">Carta</a><a href="#horario">Horario</a><a href="#dulce">Postres</a></nav>
+</div></header>
+
+<section class="hero">
+  <img id="hero" src="img/terraza.jpg" alt="Terraza de Farfalla de noche, con luces colgantes">
+  <div class="wrap">
+    <div class="kicker">Restaurante y cafetería · Aldama 7, Chignahuapan</div>
+    <h1><span class="l" id="l1">Las noches del pueblo</span><span class="l" id="l2"><i>saben a Italia.</i></span></h1>
+    <p>Pizza recién salida del horno, una copa en la terraza, en pleno centro del Pueblo Mágico. Abierto todos los días hasta las 23:00.</p>
+    <div class="row"><a class="btn" href="https://www.instagram.com/saboresfarfalla" target="_blank" rel="noopener">Reservar mesa</a><a class="btn line" href="#carta">Ver la carta</a></div>
+  </div>
+</section>
+
+<section class="wrap intro">
+  <blockquote class="rv">Farfalla significa <b>mariposa</b>. Aquí viene a describir lo que se siente en el estómago justo antes del primer bocado.</blockquote>
+  <div class="figs rv">
+    <div><b>4.9</b><span>Facebook</span></div>
+    <div><b>4.5</b><span>Google</span></div>
+    <div><b>2,9k</b><span>Seguidores</span></div>
+  </div>
+</section>
+
+<section class="wrap" id="carta">
+  <div class="stack-head"><h2>La carta, <i>plato a plato</i></h2><p>Las recomendaciones que más se repiten en las reseñas de quienes ya nos visitaron.</p></div>
+  <div class="stack" id="stack">
+    <article class="sc" style="--i:0"><img src="img/pizza2.jpg" alt="Pizza al horno sobre tabla de madera"><div class="tx"><div><div class="k">Del horno</div><h3>Pizza Margherita y pepperoni</h3><p>Masa delgada, orilla dorada y los ingredientes de siempre. Para compartir al centro de la mesa.</p></div><div class="pair">Acompaña con: una copa de vino tinto</div></div><div class="shade"></div></article>
+    <article class="sc" style="--i:1"><img src="img/lasana.jpg" alt="Lasaña de la casa"><div class="tx"><div><div class="k">Pasta</div><h3>Lasaña de la casa</h3><p>Capas generosas de ragú, bechamel y queso gratinado, servida con salsa de tomate.</p></div><div class="pair">Acompaña con: ensalada de fresa y espinaca</div></div><div class="shade"></div></article>
+    <article class="sc" style="--i:2"><img src="img/ensalada.jpg" alt="Ensalada de espinaca, fresa y aguacate"><div class="tx"><div><div class="k">Fresco</div><h3>Ensalada de fresa</h3><p>Espinaca, fresa, aguacate y almendra fileteada.</p></div><div class="pair">Acompaña con: agua fresca de frutos rojos</div></div><div class="shade"></div></article>
+    <article class="sc" style="--i:3"><img src="img/cheesecake.jpg" alt="Cheesecake de frutos rojos"><div class="tx"><div><div class="k">Para cerrar</div><h3>Cheesecake y café</h3><p>El final que piden casi todas las mesas: cheesecake de frutos rojos con un espresso.</p></div><div class="pair">Acompaña con: capuchino de la casa</div></div><div class="shade"></div></article>
+  </div>
+</section>
+
+<section class="hours" id="horario">
+  <div class="wrap">
+    <svg class="dial" id="dial" viewBox="0 0 200 200" role="img" aria-label="Reloj de 24 horas: abierto de 09:00 a 23:00"></svg>
+    <div>
+      <div class="status" id="status"><i></i><span>Abierto ahora</span></div>
+      <h2 class="rv">De las <i>9 de la mañana</i> a las 11 de la noche</h2>
+      <ul>
+        <li>Lunes a domingo <span>09:00 – 23:00</span></li>
+        <li>Terraza <span>Al aire libre</span></li>
+        <li>Wi‑Fi <span>Disponible</span></li>
+        <li>A domicilio <span>Disponible</span></li>
+        <li>Reservas <span>Disponibles</span></li>
+        <li>Dirección <span>Aldama 7, Centro</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap sweets" id="dulce">
+  <h2 class="rv">Y siempre, <i>algo dulce</i></h2>
+  <div class="strip">
+    <figure class="rv"><img src="img/pay.jpg" alt="Pay de limón"><figcaption>Pay de limón</figcaption></figure>
+    <figure class="rv"><img src="img/churros.jpg" alt="Churros con cajeta"><figcaption>Churros</figcaption></figure>
+    <figure class="rv"><img src="img/frape.jpg" alt="Frappé de chocolate"><figcaption>Frappé</figcaption></figure>
+    <figure class="rv"><img src="img/panque.jpg" alt="Panqué con helado"><figcaption>Panqué con helado</figcaption></figure>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="big">Ven o llámanos,<br><span>sabes que quieres.</span></div>
+  <p>Sabores Farfalla · Aldama 7, Centro, 73300 Chignahuapan, Pue.<br>@saboresfarfalla en Instagram y Twitter</p>
+</div></footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Guirnalda: catenaria con focos que se encienden según el progreso
+  const svg = document.getElementById('lights'); const NS = 'http://www.w3.org/2000/svg';
+  let bulbs = [];
+  function drawLights(){
+    const w = innerWidth, n = Math.max(10, Math.round(w / 70)); svg.setAttribute('viewBox', `0 0 ${w} 46`); svg.innerHTML = '';
+    const sag = (x) => 6 + 18 * Math.sin(Math.PI * ((x % (w/2)) / (w/2)));
+    let d = 'M0 6'; for (let x = 0; x <= w; x += 10) d += ` L${x} ${sag(x).toFixed(1)}`;
+    const wire = document.createElementNS(NS, 'path'); wire.setAttribute('d', d); wire.setAttribute('fill', 'none'); wire.setAttribute('stroke', '#4a3a3a'); wire.setAttribute('stroke-width', '1.5'); svg.appendChild(wire);
+    bulbs = [];
+    for (let i = 0; i < n; i++){ const x = (i + .5) * w / n, y = sag(x);
+      const c = document.createElementNS(NS, 'line'); c.setAttribute('x1', x); c.setAttribute('x2', x); c.setAttribute('y1', y); c.setAttribute('y2', y + 5); c.setAttribute('stroke', '#4a3a3a'); svg.appendChild(c);
+      const b = document.createElementNS(NS, 'ellipse'); b.setAttribute('cx', x); b.setAttribute('cy', y + 10); b.setAttribute('rx', 4.2); b.setAttribute('ry', 5.6); b.setAttribute('class', 'bulb'); svg.appendChild(b); bulbs.push(b); }
+  }
+  drawLights(); addEventListener('resize', drawLights);
+
+  // Reloj 24 h
+  const dial = document.getElementById('dial');
+  const pt = (h, r) => { const a = (h / 24) * Math.PI * 2 - Math.PI / 2; return [100 + r * Math.cos(a), 100 + r * Math.sin(a)]; };
+  const arc = (h1, h2, r) => { const [x1, y1] = pt(h1, r), [x2, y2] = pt(h2, r); return `M${x1} ${y1} A${r} ${r} 0 ${(h2 - h1) > 12 ? 1 : 0} 1 ${x2} ${y2}`; };
+  let ticks = ''; for (let h = 0; h < 24; h++){ const [a, b] = pt(h, 86), [c, d] = pt(h, h % 6 ? 82 : 78); ticks += `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#5a4652" stroke-width="${h % 6 ? 1 : 2}"/>`; }
+  let labels = ''; [0, 6, 12, 18].forEach(h => { const [x, y] = pt(h, 66); labels += `<text x="${x}" y="${y + 4}" text-anchor="middle">${String(h).padStart(2, '0')}</text>`; });
+  const now = new Date(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Mexico_City', hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date()).replace(/(\d+)\/(\d+)\/(\d+),\s*(\d+):(\d+)/, '$3-$1-$2T$4:$5:00'));
+  const hNow = isNaN(now) ? 20 : (now.getHours() % 24) + now.getMinutes() / 60;
+  const open = hNow >= 9 && hNow < 23; const [nx, ny] = pt(hNow, 70);
+  dial.innerHTML = `<circle cx="100" cy="100" r="92" fill="#1b111d" stroke="#33232f"/>${ticks}
+    <path d="${arc(0, 23.99, 94)}" fill="none" stroke="#2a1d27" stroke-width="5"/>
+    <path id="openArc" d="${arc(9, 23, 94)}" fill="none" stroke="#f4c46a" stroke-width="5" stroke-linecap="round" style="filter:drop-shadow(0 0 4px #f4c46a)"/>
+    ${labels}<line x1="100" y1="100" x2="${nx}" y2="${ny}" stroke="#64d6b8" stroke-width="2.5" stroke-linecap="round"/><circle cx="100" cy="100" r="5" fill="#64d6b8"/>
+    <text x="100" y="128" text-anchor="middle" style="font:italic 15px 'Bodoni Moda',serif;fill:#efe6ea">09 — 23 h</text>`;
+  const st = document.getElementById('status'); if (!open){ st.classList.add('closed'); st.querySelector('span').textContent = 'Cerrado ahora · abrimos a las 09:00'; }
+
+  // Scroll
+  const hero = document.getElementById('hero'), l1 = document.getElementById('l1'), l2 = document.getElementById('l2');
+  const cards = [...document.querySelectorAll('.sc')];
+  function frame(){
+    const y = scrollY, max = document.documentElement.scrollHeight - innerHeight, p = max > 0 ? y / max : 0;
+    const lit = Math.round(p * bulbs.length);
+    bulbs.forEach((b, i) => b.classList.toggle('on', i < Math.max(1, lit)));
+    if (!reduce){
+      const k = Math.min(1, y / innerHeight);
+      hero.style.transform = `scale(${1.18 - .18 * k}) translateY(${y * .25}px)`;
+      l1.style.transform = `translateX(${-k * 60}px)`; l2.style.transform = `translateX(${k * 60}px)`;
+      cards.forEach((c, i) => { const next = cards[i + 1]; if (!next) return;
+        const r = c.getBoundingClientRect(), nr = next.getBoundingClientRect();
+        const prog = Math.min(1, Math.max(0, 1 - (nr.top - r.top) / r.height));
+        c.style.transform = `scale(${1 - prog * .06})`; c.querySelector('.shade').style.opacity = (prog * .55).toFixed(3); });
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
