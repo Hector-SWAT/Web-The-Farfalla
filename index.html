@@ -1,6 +1,6 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Propuestas Farfalla</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Gloock&family=Figtree:wght@400;500;600&display=swap">
 <style>
 /* Layout: sala de revisión; selector de propuesta arriba, marco de navegador con la vista previa en vivo */
 :root{--bg:#f6f1f4;--surface:#ffffff;--fg:#2c1424;--muted:#76606d;--line:#e3d5de;--accent:#5a1440;--accent2:#1f9e80;--display:'Gloock',Georgia,serif;--body:'Figtree',system-ui,sans-serif}
@@ -36,6 +36,10 @@ iframe{display:block;border:0;width:100%;height:min(78vh,820px);height:min(78svh
 .stage.mobile iframe{width:min(390px,100%);border-inline:1px solid var(--line)}
 .hint{color:var(--muted);font-size:13px;margin:0}
 @media (max-width:760px){.tabs{grid-template-columns:1fr}}
+/* Títulos con la tipografía del logo (Amatic SC, la más parecida en Google Fonts) */
+header h1,.tab b{font-family:'Amatic SC','Arial Narrow',sans-serif;font-weight:700;letter-spacing:.01em}
+header h1{font-size:clamp(42px,5.6vw,62px)}
+.tab b{font-size:32px}
 </style>
 </head><body>
 

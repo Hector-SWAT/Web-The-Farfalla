@@ -6,7 +6,7 @@
 <title>Farfalla · Mariposa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Gloock&family=Figtree:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap">
 <style>
 /* Layout: papel lila, tinta ciruela; arco de puerta en el hero, carta en riel horizontal anclado, mariposa como indicador de scroll */
 :root{
@@ -173,6 +173,15 @@ footer small{color:var(--muted)}
   .visit .grid{grid-template-columns:1fr}
   .rail{display:none}
 }
+/* Títulos con la tipografía del logo (Amatic SC, la más parecida en Google Fonts) */
+:root{--title:'Amatic SC','Arial Narrow',sans-serif}
+h1,h2,h3,.dict .word,.dish h3{font-family:var(--title);font-weight:700;letter-spacing:.01em}
+h1{font-size:clamp(64px,9.5vw,128px);line-height:.92}
+h2{font-size:clamp(46px,6.4vw,82px);line-height:1}
+.dish h3{font-size:34px;line-height:1}
+.dish.typo h3{font-size:54px}
+.dict .word{font-size:clamp(56px,6.8vw,88px)}
+@media (max-width:860px){h1{font-size:clamp(58px,17vw,84px)}h2{font-size:clamp(42px,12vw,58px)}.dish h3{font-size:30px}.dish.typo h3{font-size:44px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
